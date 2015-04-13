@@ -23,5 +23,5 @@ php -S 127.0.0.1:8000 -t web/
 ## Tests unitaires
 
 ```
-phpunit --bootstrap vendor/autoload.php tests/Model/StudentTest.php
+phpunit --bootstrap vendor/autoload.php tests
 ```
