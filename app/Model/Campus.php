@@ -4,6 +4,9 @@ namespace Model;
 use \Exception\CampusException;
 use \Exception\FullCampusException;
 use \Model\Student;
+use \Model\Teacher;
+use \Service\StudentService;
+use \Service\TeacherService;
 
 
 class Campus {
@@ -36,35 +39,51 @@ class Campus {
     }
   }
 
-  public function addStudent(Student $s) {
+  public function addStudent(Student $student) {
     if (!$this->isFull()) {
-      $this->_students[] = $s;
+      //defines his Id into the campus
+      //$s->setId(count($this->_students));
+
+      $this->_students[] = $student;
     } 
     else {
       throw new FullCampusException($this);
     }
   }
 
-  public function removeStudent(Student $s) {
-
+  public function removeStudent(Student $student) {
+    $counter = 0;
+    foreach ($this->_students as $idx => $current) {
+      if ($current == $student) {
+        unset($this->_students[$idx]);
+        $counter++;
+      }
+    }
+    return $counter > 0 ? true : false;
   }
 
   public function getStudents() {
     //sort by ID
-
     return $this->_students;
   }
 
-  public function addTeacher(Model\Teacher $t) {
-
+  public function addTeacher(Teacher $teacher) {
+    $this->_teachers[] = $teacher;
   }
 
-  public function removeTeacher(Model\Teacher $t) {
-
+  public function removeTeacher(Teacher $teacher) {
+    $counter = 0;
+    foreach ($this->_teachers as $idx => $current) {
+      if ($current == $teacher) {
+        unset($this->_students[$idx]);
+        $counter++;
+      }
+    }
+    return $counter > 0 ? true : false;
   }
 
   public function getTeachers() {
-
+    return $this->_teachers;
   }
 
   public function isFull() {

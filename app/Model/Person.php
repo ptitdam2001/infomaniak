@@ -6,17 +6,24 @@ use Exception\PersonException;
 
 
 abstract class Person {
+
+  const UNREGISTERED = 0;
+
   public $id;
   public $firstname;
   public $lastname;
 
-  public function __construct($firstname, $lastname) {
+  public function __construct($firstname, $lastname, $id = self::UNREGISTERED) {
     if (is_null($firstname) || is_null($lastname)) {
       throw new \Exception\PersonException("firstname and lastname are mandatory");
     }
 
     $this->firstname = $firstname;
     $this->lastname = $lastname;
+    if (!is_null($id)) {
+      $this->setId($id);
+    }
+
   }
 
   public function setId($id) {
