@@ -1,9 +1,11 @@
 <?php
 namespace Service;
 
-static class CampusService {
+use \Model\Campus;
 
-  public function compare(Model\Campus $c1, Model\Campus $c2) {
-    
+class CampusService {
+
+  static public function equals(Campus $c1, Campus $c2) {
+    return ($c1->city === $c2->city && $c1->area === $c2->area) ? true : false;
   }
 }

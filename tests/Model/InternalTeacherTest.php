@@ -54,4 +54,13 @@ class InternalTeacherTest extends \PHPUnit_Framework_TestCase {
   public function testSetIdWhenItsNotAnInteger(InternalTeacher $teacher) {
     $teacher->setId("12");
   }
+
+  /**
+   * @covers \Model\InternalTeacher::__construct
+   */
+  public function test2InternalTeachersHaveTheSameSalary() {
+    $t1 = new InternalTeacher("Bob", "Dupont");
+    $t2 = new InternalTeacher("Rob", "Sullivan");
+    $this->assertEquals($t1->salary, $t2->salary);
+  }
 }

@@ -12,7 +12,6 @@ class StudentTest extends \PHPUnit_Framework_TestCase {
   public function testObjectCreationHasMandatoriesParameters() {
     new Student(null, "Suhard");
     new Student("Damien", null);
-    new Student();
   }
 
   /**

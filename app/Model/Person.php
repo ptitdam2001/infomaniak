@@ -22,7 +22,8 @@ abstract class Person {
   public function setId($id) {
     if (is_int($id)) {
       $this->id = $id;
-    } else {
+    } 
+    else {
       throw new \Exception\PersonException("id is not an integer");
     }
     
