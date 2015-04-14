@@ -4,7 +4,7 @@ use Service\StudentService;
 use Model\Student;
 
 class StudentServiceTest extends \PHPUnit_Framework_TestCase {
-	
+
 	/**
 	 * @covers \Service\StudentService::equals
 	*/
@@ -50,5 +50,57 @@ class StudentServiceTest extends \PHPUnit_Framework_TestCase {
 		$student1 = new Student("Damien", "Suhard");
 		$student2 = new Student("Damien", "Suhard");
 		$this->assertTrue(StudentService::equals($student1, $student2));
+	}
+
+	/**
+	 * @covers \Service\StudentService::sortById
+	 * @uses \Model\Student
+	 */
+	public function testSortByIdMethod() {
+		$students = array(
+			new Student("fake1", "fakename1", 3),
+			new Student("fake2", "fakename2", 4),
+			new Student("fake3", "fakename3", 2),
+			new Student("fake4", "fakename4")
+		);
+
+		$goodresult = array(
+			new Student("fake4", "fakename4"),
+			new Student("fake3", "fakename3", 2),
+			new Student("fake1", "fakename1", 3),
+			new Student("fake2", "fakename2", 4)
+		);
+
+		$sorted = StudentService::sortById($students);
+
+		$this->assertFalse($students == $sorted);
+		$this->assertTrue($goodresult == $sorted);
+	}
+
+	/**
+	 * @covers \Service\StudentService::sortById
+	 * @uses \Model\Student
+	 */
+	public function testSortByIdMethodWith2UnregisteredStudents() {
+		$students = array(
+			new Student("fake1", "fakename1", 3),
+			new Student("fake2", "fakename2", 4),
+			new Student("fake0", "fakename0"),
+			new Student("fake3", "fakename3", 2),
+			new Student("fake4", "fakename4")
+		);
+
+		$goodresult = array(
+			new Student("fake4", "fakename4"),
+			new Student("fake0", "fakename0"),
+			new Student("fake3", "fakename3", 2),
+			new Student("fake1", "fakename1", 3),
+			new Student("fake2", "fakename2", 4)
+		);
+
+		$sorted = StudentService::sortById($students);
+
+		$this->assertFalse($students == $sorted);
+		$this->assertTrue($goodresult == $sorted);
 	}
 }

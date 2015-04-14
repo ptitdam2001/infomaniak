@@ -14,4 +14,13 @@ class StudentService {
     }
   }
 
+  static private function student_compare(Student $s1, Student $s2) {
+    return $s1->id - $s2->id;
+  }
+
+  static public function sortById(array $students) {
+    usort($students, array('self', 'student_compare'));
+    return $students;
+  }
+
 }
