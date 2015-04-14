@@ -9,7 +9,7 @@ use \Service\StudentService;
 use \Service\TeacherService;
 
 
-class Campus {
+class Campus implements \JsonSerializable {
 
   const UNLIMITED = 0;
 
@@ -88,5 +88,19 @@ class Campus {
 
   public function isFull() {
     return ($this->capacity !== self::UNLIMITED && count($this->_students) === $this->capacity) ? true : false;
+  }
+
+  public function jsonSerialize() {
+    return array(
+      'type' => get_class($this), 
+      'datas' => array(
+        'id' => $this->id, 
+        'city' => $this->city, 
+        'area' => $this->area,
+        'capacity' => $this->capacity,
+        'students' => $this->_students,
+        'teachers' => $this->_teachers
+      )
+    );
   }
 }

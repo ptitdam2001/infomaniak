@@ -20,4 +20,16 @@ abstract class Teacher extends Person {
       throw new \Exception\TeacherException("Salary must be an integer");
     } 
   }
+
+  public function jsonSerialize() {
+    return array(
+      'type' => get_class($this), 
+      'datas' => array(
+        'id' => $this->id, 
+        'firstname' => $this->firstname, 
+        'lastname' => $this->lastname,
+        'salary' => $this->salary
+      )
+    );
+  }
 }

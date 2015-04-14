@@ -5,7 +5,7 @@ namespace Model;
 use Exception\PersonException;
 
 
-abstract class Person {
+abstract class Person implements \JsonSerializable {
 
   const UNREGISTERED = 0;
 
@@ -34,5 +34,16 @@ abstract class Person {
       throw new \Exception\PersonException("id is not an integer");
     }
     
+  }
+
+  public function jsonSerialize() {
+    return array(
+      'type' => get_class($this), 
+      'datas' => array(
+        'id' => $this->id, 
+        'firstname' => $this->firstname, 
+        'lastname' => $this->lastname
+      )
+    );
   }
 }
