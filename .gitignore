@@ -1,2 +1,6 @@
 vendor
 composer.lock
+data/campus/*
+data/student/*
+data/teacher/*
+tests/fixture/campus/*

@@ -23,7 +23,7 @@ abstract class Teacher extends Person {
 
   public function jsonSerialize() {
     return array(
-      'type' => get_class($this), 
+      'type' => (new \ReflectionClass($this))->getShortName(), 
       'datas' => array(
         'id' => $this->id, 
         'firstname' => $this->firstname, 

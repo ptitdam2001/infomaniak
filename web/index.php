@@ -10,6 +10,7 @@ use \Model\Student;
 use \Model\InternalTeacher;
 use \Model\ExternalTeacher;
 use \Model\Campus;
+use \Service\DataService;
 
 $campus = new Campus("Montpellier", "Herault");
 
@@ -23,6 +24,13 @@ $campus->addTeacher($t2);
 
 echo '<pre>';
 echo json_encode($campus, JSON_PRETTY_PRINT);
+echo '</pre>';
+
+var_dump(DataService::getInstance()->save($campus));
+DataService::getInstance()->remove($campus);
+
+echo '<pre>';
+echo DataService::getInstance()->getAll("campus");
 echo '</pre>';
 
 $loader = new Twig_Loader_Filesystem('../app/View/');

@@ -63,8 +63,7 @@ class Campus implements \JsonSerializable {
   }
 
   public function getStudents() {
-    //sort by ID
-    return $this->_students;
+    return StudentService::sortById($this->_students);
   }
 
   public function addTeacher(Teacher $teacher) {
@@ -92,7 +91,7 @@ class Campus implements \JsonSerializable {
 
   public function jsonSerialize() {
     return array(
-      'type' => get_class($this), 
+      'type' => (new \ReflectionClass($this))->getShortName(), 
       'datas' => array(
         'id' => $this->id, 
         'city' => $this->city, 

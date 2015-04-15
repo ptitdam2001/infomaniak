@@ -183,28 +183,21 @@ class CampusTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers \Model\Campus::removeStudent
-	 * @uses \Model\Student
-	 * @uses \Model\Campus
-	 * @depends testObjectCreationWithUnlimitedCapacity
+	 * @covers \Model\Campus::jsonSerialize
 	 */
-	// public function testRemoveStudentWhoDoesntExists(Campus $campus) {
-	// 	$this->assertFalse($campus->removeStudent(new Student("fake", "remove")));
-	// }
+	public function testJsonEncodingOfCampus() {
+		$campus = new Campus("Montpellier", "Herault");
 
-	/**
-	 * @covers \Model\Campus::getStudents
-	 * @covers \Model\Campus::addStudent
-	 * @uses \Model\Student
-	 * @depends testObjectCreationWithUnlimitedCapacity
-	 */
-	// public function testGetStudentsReturnsAnArray(Campus $campus) {
-	// 	$campus->addStudent(new Student("fake", "add"));
-	// 	$students = $campus->getStudents();
-	// 	$this->assertInternalType('array', $students);
-	// 	$this->assertGreaterThan(0, count($students));
-	// 	$this->assertEquals(1, count($students));
-	// 	$this->assertInstanceOf('Student', $students[0]);
-	// }
+		$student = new Student("toto","titi",1);
+		$campus->addStudent($student);
+
+		$t = new InternalTeacher("moi", "doris");
+		$t2 = new ExternalTeacher("toi", "John", 1500);
+		$campus->addTeacher($t);
+		$campus->addTeacher($t2);
+
+		$this->assertJsonStringEqualsJsonFile('tests/fixture/campus.json', json_encode($campus));
+
+	}
 
 }

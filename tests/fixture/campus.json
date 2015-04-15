@@ -1,0 +1,39 @@
+{
+    "type": "Campus",
+    "datas": {
+        "id": null,
+        "city": "Montpellier",
+        "area": "Herault",
+        "capacity": 0,
+        "students": [
+            {
+                "type": "Student",
+                "datas": {
+                    "id": 1,
+                    "firstname": "toto",
+                    "lastname": "titi"
+                }
+            }
+        ],
+        "teachers": [
+            {
+                "type": "InternalTeacher",
+                "datas": {
+                    "id": 0,
+                    "firstname": "moi",
+                    "lastname": "doris",
+                    "salary": 500
+                }
+            },
+            {
+                "type": "ExternalTeacher",
+                "datas": {
+                    "id": 0,
+                    "firstname": "toi",
+                    "lastname": "John",
+                    "salary": 1500
+                }
+            }
+        ]
+    }
+}

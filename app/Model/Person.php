@@ -38,7 +38,7 @@ abstract class Person implements \JsonSerializable {
 
   public function jsonSerialize() {
     return array(
-      'type' => get_class($this), 
+      'type' => (new \ReflectionClass($this))->getShortName(), 
       'datas' => array(
         'id' => $this->id, 
         'firstname' => $this->firstname, 
